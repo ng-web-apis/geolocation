@@ -2,9 +2,9 @@ import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {GeolocationModule} from '@ng-web-apis/geolocation';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routes';
-import {StaticModule} from './modules/static/static.module';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -12,7 +12,7 @@ import {StaticModule} from './modules/static/static.module';
         FormsModule,
         BrowserModule.withServerTransition({appId: 'demo'}),
         AppRoutingModule,
-        StaticModule,
+        GeolocationModule,
     ],
     declarations: [AppComponent],
     providers: [

@@ -19,7 +19,7 @@
         "typeRoots": ["node_modules/@types"],
         "lib": ["es2018", "dom"],
         "paths": {
-            "geolocation": ["projects/geolocation/src/public-api"]
+            "@ng-web-apis/geolocation": ["projects/geolocation/src/public-api"]
         }
     }
 }

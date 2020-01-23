@@ -18,7 +18,8 @@
         "core-js": "2.6.9",
         "rxjs": "6.5.2",
         "zone.js": "0.9.1",
-        "geolocation": "latest"
+        "@ng-web-apis/geolocation": "latest",
+        "@ng-web-apis/common": "1.0.1"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^0.803.2",
