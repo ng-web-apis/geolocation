@@ -1,30 +1,38 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {GeolocationService, WatchPositionDirective} from '@ng-web-apis/geolocation';
+import {GeolocationService} from '@ng-web-apis/geolocation';
+import {Subscription} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 @Component({
     selector: 'my-app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.style.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [WatchPositionDirective],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     positions: Position | null = null;
     currentPositionUrl: SafeResourceUrl | null = null;
     toggle = false;
+    constantSubsription: Subscription | null = null;
 
     constructor(
         private readonly geolocationService: GeolocationService,
-        private readonly changeDetectorRef: ChangeDetectorRef,
         private readonly domSanitizer: DomSanitizer,
     ) {}
 
     getCurrentPosition() {
-        this.geolocationService.getCurrentPosition().then(position => {
-            this.positions = position;
-            this.changeDetectorRef.markForCheck();
-        });
+        this.geolocationService.pipe(take(1)).subscribe();
+    }
+
+    ngOnInit() {
+        this.constantSubsription = this.geolocationService.subscribe();
+    }
+
+    kill() {
+        if (this.constantSubsription) {
+            this.constantSubsription.unsubscribe();
+        }
     }
 
     getUrl(position: Position) {
@@ -37,9 +45,5 @@ export class AppComponent {
                 position.coords.latitude
             },${position.coords.longitude}&layer=mapnik`,
         );
-    }
-
-    toggleMap() {
-        this.toggle = !this.toggle;
     }
 }
