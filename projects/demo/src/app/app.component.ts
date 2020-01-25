@@ -25,7 +25,9 @@ export class AppComponent implements OnInit {
         this.geolocationService.pipe(take(1)).subscribe();
     }
 
-    ngOnInit() {
+    ngOnInit() {}
+
+    startConstantSubscription() {
         this.constantSubsription = this.geolocationService.subscribe();
     }
 

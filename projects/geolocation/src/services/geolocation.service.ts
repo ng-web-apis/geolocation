@@ -1,6 +1,7 @@
 import {Inject, Injectable, Optional} from '@angular/core';
 import {NAVIGATOR} from '@ng-web-apis/common';
 import {Observable} from 'rxjs';
+import {finalize, shareReplay} from 'rxjs/operators';
 import {POSITION_OPTIONS} from '../tokens/geolocation-options';
 
 @Injectable({
@@ -22,6 +23,11 @@ export class GeolocationService extends Observable<Position> {
                 this.positionOptions,
             );
         });
+
+        return this.pipe(
+            finalize(() => this.clearWatch()),
+            shareReplay({bufferSize: 1, refCount: true}),
+        ) as GeolocationService;
     }
 
     clearWatch() {

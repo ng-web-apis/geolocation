@@ -2,7 +2,8 @@ Demo
 
 <button (click)="getCurrentPosition()">Get my coordinates</button>
 
-<button (click)="kill()">kill last subscriber</button>
+<button (click)="kill()">kill constant watch</button>
+<button (click)="startConstantSubscription()">start constant watch</button>
 
 <ng-container *ngIf="!!positions">
     <div>coordinates:</div>
