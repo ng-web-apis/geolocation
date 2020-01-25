@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
-import {WatchPositionDirective} from './directives/watchPosition.directive';
 
 @NgModule({
-    declarations: [WatchPositionDirective],
-    exports: [WatchPositionDirective],
+    declarations: [],
+    exports: [],
 })
 export class GeolocationModule {}
