@@ -1,7 +1,7 @@
 import {Inject, Injectable, Optional} from '@angular/core';
-import {NAVIGATOR} from '@ng-web-apis/common';
 import {Observable} from 'rxjs';
 import {finalize, shareReplay} from 'rxjs/operators';
+import {GEOLOCATION} from '../tokens/geolocation';
 import {POSITION_OPTIONS} from '../tokens/geolocation-options';
 
 @Injectable({
@@ -11,13 +11,13 @@ export class GeolocationService extends Observable<Position> {
     private watchPositionId = 0;
 
     constructor(
-        @Inject(NAVIGATOR) private readonly navigatorRef: Navigator,
+        @Inject(GEOLOCATION) private readonly geolocationRef: Geolocation,
         @Optional()
         @Inject(POSITION_OPTIONS)
         private readonly positionOptions: PositionOptions,
     ) {
         super(subscriber => {
-            this.watchPositionId = this.navigatorRef.geolocation.watchPosition(
+            this.watchPositionId = this.geolocationRef.watchPosition(
                 position => subscriber.next(position),
                 positionError => subscriber.error(positionError),
                 this.positionOptions,
@@ -31,6 +31,6 @@ export class GeolocationService extends Observable<Position> {
     }
 
     clearWatch() {
-        this.navigatorRef.geolocation.clearWatch(this.watchPositionId);
+        this.geolocationRef.clearWatch(this.watchPositionId);
     }
 }

@@ -1,6 +1,6 @@
 import {InjectionToken} from '@angular/core';
 
 export const POSITION_OPTIONS = new InjectionToken<PositionOptions>(
-    'Token for an optional position options',
+    'Token for an additional position options',
     {factory: () => ({})},
 );
