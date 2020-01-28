@@ -14,7 +14,7 @@ export class GeolocationService extends Observable<Position> {
         @Inject(GEOLOCATION) private readonly geolocationRef: Geolocation,
         @Optional()
         @Inject(POSITION_OPTIONS)
-        private readonly positionOptions: PositionOptions,
+        private readonly positionOptions?: PositionOptions,
     ) {
         super(subscriber => {
             this.watchPositionId = this.geolocationRef.watchPosition(
