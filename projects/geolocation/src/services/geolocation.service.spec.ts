@@ -1,7 +1,8 @@
 import {TestBed} from '@angular/core/testing';
-import {interval} from 'rxjs';
-import {skip, take} from 'rxjs/operators';
+import {EMPTY, interval, timer} from 'rxjs';
+import {catchError, skip, take} from 'rxjs/operators';
 import {GEOLOCATION} from '../tokens/geolocation';
+import {GEOLOCATION_SUPPORT} from '../tokens/geolocation-support';
 import {GeolocationService} from './geolocation.service';
 
 describe('Geolocation service', () => {
@@ -9,8 +10,11 @@ describe('Geolocation service', () => {
     let clearWatchCount: number;
 
     class FakeGeolocation {
-        watchPosition(success: Function) {
+        watchPosition(success: Function, error: Function) {
             interval(300).subscribe(number => success(number.toString()));
+            timer(1000)
+                .pipe(take(1))
+                .subscribe(() => error('error'));
         }
 
         clearWatch() {
@@ -26,7 +30,9 @@ describe('Geolocation service', () => {
             ],
         });
 
-        service = TestBed.get(GeolocationService);
+        service = TestBed.get(GeolocationService).pipe(
+            catchError((_err, caught) => caught),
+        );
         clearWatchCount = 0;
     });
 
@@ -50,7 +56,7 @@ describe('Geolocation service', () => {
         });
     });
 
-    it('clearWatch method is called once when all subscribers are unsubscribed.', () => {
+    it('clearWatch method is called once when all subscribers are unsubscribed.', done => {
         const firstSubscription = service.subscribe();
 
         const secondSubscription = service.subscribe();
@@ -59,12 +65,50 @@ describe('Geolocation service', () => {
         secondSubscription.unsubscribe();
 
         expect(clearWatchCount).toEqual(1);
+        done();
     });
 
-    it('clearWatch method is not called if none of the subscribers unsubscribed', () => {
+    it('clearWatch method is not called if none of the subscribers unsubscribed', done => {
         service.subscribe();
         service.subscribe();
 
         expect(clearWatchCount).toEqual(0);
+        done();
+    });
+
+    it('Error', done => {
+        service = TestBed.get(GeolocationService);
+
+        service
+            .pipe(
+                catchError(error => {
+                    expect(error).toBe('error');
+                    done();
+
+                    return EMPTY;
+                }),
+            )
+            .subscribe();
+    });
+});
+
+describe('Geolocation Service if unsupported', () => {
+    it('cannot recieve and throws an error if Geolocation is not supported', done => {
+        TestBed.configureTestingModule({
+            providers: [
+                {provide: GEOLOCATION_SUPPORT, useValue: false},
+                GeolocationService,
+            ],
+        });
+
+        const service$: GeolocationService = TestBed.get(GeolocationService);
+
+        service$.subscribe(
+            () => {},
+            error => {
+                expect(error).toBe('Geolocation is not supported in your browser');
+                done();
+            },
+        );
     });
 });
