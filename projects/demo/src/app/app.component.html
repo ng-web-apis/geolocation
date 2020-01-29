@@ -37,13 +37,14 @@
             </label>
         </div>
 
-        <ul *ngIf="!!positions" class="coordinates">
+        <ul *ngIf="!!position" class="coordinates">
             coordinates:
 
-            <li>latitude: {{ positions.coords.latitude }}</li>
-            <li>longitude: {{ positions.coords.longitude }}</li>
-            <li>timestamp: {{ positions.timestamp }}</li>
+            <li>latitude: {{ position.coords.latitude }}</li>
+            <li>longitude: {{ position.coords.longitude }}</li>
+            <li>timestamp: {{ position.timestamp }}</li>
         </ul>
+        <app-map *ngIf="!!position" [coordinatesChange]="position"></app-map>
     </section>
 </main>
 

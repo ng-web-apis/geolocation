@@ -11,7 +11,7 @@ import {take} from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-    positions: Position | null = null;
+    position: Position | null = null;
     currentPositionUrl: SafeResourceUrl | null = null;
     toggle = false;
     watchSubscription: Subscription | null = null;
@@ -37,7 +37,7 @@ export class AppComponent {
 
     startWatchGeoposition() {
         this.watchSubscription = this.geolocationService.subscribe(position => {
-            this.positions = position;
+            this.position = position;
             this.changeDetectorRef.markForCheck();
         });
     }

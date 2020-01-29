@@ -5,6 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {POSITION_OPTIONS} from 'projects/geolocation/src/tokens/geolocation-options';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routes';
+import {MapComponent} from './map/map.component';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -13,7 +14,7 @@ import {AppRoutingModule} from './app.routes';
         BrowserModule.withServerTransition({appId: 'demo'}),
         AppRoutingModule,
     ],
-    declarations: [AppComponent],
+    declarations: [AppComponent, MapComponent],
     providers: [
         {
             provide: LocationStrategy,
