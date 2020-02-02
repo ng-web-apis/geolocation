@@ -10,9 +10,8 @@ import {BehaviorSubject} from 'rxjs';
 export class MapComponent {
     @Input()
     set coordinatesChange(coords: Coordinates) {
-        this.transformCoords(coords);
+        this.coordsToStyle(coords);
     }
-    coords: Coordinates | null = null;
 
     initialCoords: Coordinates | null = null;
 
@@ -20,23 +19,15 @@ export class MapComponent {
 
     constructor(private readonly domSanitizer: DomSanitizer) {}
 
-    transformCoords(coords: Coordinates) {
+    private coordsToStyle(coordinates: Coordinates) {
         if (!this.initialCoords) {
-            this.initialCoords = coords;
+            this.initialCoords = coordinates;
 
             return;
         }
 
-        this.coordsToStyle(coords);
-    }
-
-    coordsToStyle(coordinates: Coordinates) {
-        const deltaX =
-            (this.initialCoords &&
-                this.initialCoords.longitude + coordinates.longitude)! * 10000;
-        const deltaY =
-            (this.initialCoords && this.initialCoords.latitude + coordinates.latitude)! *
-            10000;
+        const deltaX = (this.initialCoords.longitude + coordinates.longitude) * 10000;
+        const deltaY = (this.initialCoords.latitude + coordinates.latitude)! * 10000;
         const style = `translate(${deltaX}px,${deltaY}px)`;
 
         const safestyle = this.domSanitizer.bypassSecurityTrustStyle(style);

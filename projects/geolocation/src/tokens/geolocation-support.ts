@@ -7,9 +7,7 @@ export const GEOLOCATION_SUPPORT = new InjectionToken<boolean>(
         factory: () => {
             const window = inject(WINDOW);
 
-            return (
-                window !== null && !!window.navigator && !!window.navigator.geolocation
-            );
+            return !!window.navigator && !!window.navigator.geolocation;
         },
     },
 );
