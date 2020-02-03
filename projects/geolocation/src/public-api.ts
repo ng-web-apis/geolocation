@@ -1,4 +1,6 @@
 /**
  * Public API Surface of geolocation
  */
-export * from './module';
+
+/* Services */
+export * from './services/geolocation.service';

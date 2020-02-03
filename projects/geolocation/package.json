@@ -3,7 +3,8 @@
     "version": "0.0.1",
     "peerDependencies": {
         "@angular/common": ">=6.0.0",
-        "@angular/core": ">=6.0.0"
+        "@angular/core": ">=6.0.0",
+        "@ng-web-apis/common": ">=1.0.0"
     },
     "description": "This is a library for declarative use of Geolocation API with Angular",
     "keywords": [
