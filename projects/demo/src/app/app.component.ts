@@ -30,26 +30,30 @@ export class AppComponent {
     }
 
     toggleWatch() {
-        !this.watchSubscription
-            ? this.startWatchGeoposition()
-            : this.stopWatchGeoposition();
+        if (!this.watchSubscription) {
+            this.startWatchGeoposition();
+
+            return;
+        }
+
+        this.stopWatchGeoposition();
     }
 
-    startWatchGeoposition() {
+    private startWatchGeoposition() {
         this.watchSubscription = this.geolocationService.subscribe(position => {
             this.position = position;
             this.changeDetectorRef.markForCheck();
         });
     }
 
-    stopWatchGeoposition() {
+    private stopWatchGeoposition() {
         if (this.watchSubscription) {
             this.watchSubscription.unsubscribe();
             this.watchSubscription = null;
         }
     }
 
-    getUrl(position: Position): SafeResourceUrl {
+    private getUrl(position: Position): SafeResourceUrl {
         const longitude = position.coords.longitude;
         const latitude = position.coords.latitude;
 

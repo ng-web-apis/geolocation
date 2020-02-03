@@ -1,4 +1,4 @@
-import {Inject, Injectable, Optional} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {finalize, shareReplay} from 'rxjs/operators';
 import {GEOLOCATION} from '../tokens/geolocation';
@@ -9,34 +9,29 @@ import {GEOLOCATION_SUPPORT} from '../tokens/geolocation-support';
     providedIn: 'root',
 })
 export class GeolocationService extends Observable<Position> {
-    private watchPositionId = 0;
-
     constructor(
-        @Inject(GEOLOCATION) private readonly geolocationRef: Geolocation,
+        @Inject(GEOLOCATION) geolocationRef: Geolocation,
         @Inject(GEOLOCATION_SUPPORT) geolocationSupported: boolean,
-        @Optional()
         @Inject(POSITION_OPTIONS)
-        private readonly positionOptions?: PositionOptions,
+        positionOptions: PositionOptions,
     ) {
+        let watchPositionId = 0;
+
         super(subscriber => {
             if (!geolocationSupported) {
                 subscriber.error('Geolocation is not supported in your browser');
             }
 
-            this.watchPositionId = this.geolocationRef.watchPosition(
+            watchPositionId = geolocationRef.watchPosition(
                 position => subscriber.next(position),
                 positionError => subscriber.error(positionError),
-                this.positionOptions,
+                positionOptions,
             );
         });
 
         return this.pipe(
-            finalize(() => this.clearWatch()),
+            finalize(() => geolocationRef.clearWatch(watchPositionId)),
             shareReplay({bufferSize: 1, refCount: true}),
         ) as GeolocationService;
-    }
-
-    clearWatch() {
-        this.geolocationRef.clearWatch(this.watchPositionId);
     }
 }

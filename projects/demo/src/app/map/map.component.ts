@@ -9,37 +9,25 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class MapComponent {
     @Input()
-    set coordinatesChange(position: Position) {
-        this.transformCoords(position);
+    set coordinatesChange(coords: Coordinates) {
+        this.coordsToStyle(coords);
     }
-    coords: Coordinates | null = null;
 
-    initialPosition: Position | null = null;
+    initialCoords: Coordinates | null = null;
 
     markerTransform$ = new BehaviorSubject<SafeStyle>('translate(0px,0px)');
 
     constructor(private readonly domSanitizer: DomSanitizer) {}
 
-    transformCoords(position: Position) {
-        if (!this.initialPosition) {
-            this.initialPosition = position;
+    private coordsToStyle(coordinates: Coordinates) {
+        if (!this.initialCoords) {
+            this.initialCoords = coordinates;
 
             return;
         }
 
-        this.coordsToStyle(position);
-    }
-
-    coordsToStyle(position: Position) {
-        const deltaX =
-            (this.initialPosition &&
-                this.initialPosition.coords.longitude - position.coords.longitude)! *
-            10000;
-
-        const deltaY =
-            (this.initialPosition &&
-                this.initialPosition.coords.latitude - position.coords.latitude)! * 10000;
-
+        const deltaX = (this.initialCoords.longitude + coordinates.longitude) * 10000;
+        const deltaY = (this.initialCoords.latitude + coordinates.latitude)! * 10000;
         const style = `translate(${deltaX}px,${deltaY}px)`;
 
         const safestyle = this.domSanitizer.bypassSecurityTrustStyle(style);

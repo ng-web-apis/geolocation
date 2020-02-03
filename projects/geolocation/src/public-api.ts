@@ -4,5 +4,3 @@
 
 /* Services */
 export * from './services/geolocation.service';
-
-export * from './module';
