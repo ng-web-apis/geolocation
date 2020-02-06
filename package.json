@@ -67,7 +67,9 @@
         "core-js": "^2.5.4",
         "rxjs": "^6.5.2",
         "tslib": "^1.10.0",
-        "zone.js": "~0.8.29"
+        "zone.js": "~0.8.29",
+        "highlight.js": "^9.15.5",
+        "ngx-highlightjs": "3.0.3"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.13.9",
@@ -82,6 +84,7 @@
         "@tinkoff/linters": "^0.4.0",
         "@types/express": "4.16.1",
         "@types/express-serve-static-core": "4.16.2",
+        "@types/highlight.js": "^9.12.3",
         "@types/jasmine": "^3.3.16",
         "@types/jasminewd2": "^2.0.6",
         "@types/node": "~8.9.4",

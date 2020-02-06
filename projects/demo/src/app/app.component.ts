@@ -3,9 +3,10 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {GeolocationService} from '@ng-web-apis/geolocation';
 import {Subscription} from 'rxjs';
 import {take} from 'rxjs/operators';
+import {SAMPLE} from './samples/sample';
 
 @Component({
-    selector: 'my-app',
+    selector: 'main',
     templateUrl: './app.component.html',
     styleUrls: ['./app.style.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +16,9 @@ export class AppComponent {
     currentPositionUrl: SafeResourceUrl | null = null;
     toggle = false;
     watchSubscription: Subscription | null = null;
+    error: PositionError | null = null;
+
+    sample = SAMPLE;
 
     constructor(
         private readonly geolocationService: GeolocationService,
@@ -23,10 +27,16 @@ export class AppComponent {
     ) {}
 
     getCurrentPosition() {
-        this.geolocationService.pipe(take(1)).subscribe(position => {
-            this.currentPositionUrl = this.getUrl(position);
-            this.changeDetectorRef.markForCheck();
-        });
+        this.geolocationService.pipe(take(1)).subscribe(
+            position => {
+                this.currentPositionUrl = this.getUrl(position);
+                this.changeDetectorRef.markForCheck();
+            },
+            error => {
+                this.error = error;
+                this.changeDetectorRef.markForCheck();
+            },
+        );
     }
 
     toggleWatch() {
@@ -40,10 +50,16 @@ export class AppComponent {
     }
 
     private startWatchGeoposition() {
-        this.watchSubscription = this.geolocationService.subscribe(position => {
-            this.position = position;
-            this.changeDetectorRef.markForCheck();
-        });
+        this.watchSubscription = this.geolocationService.subscribe(
+            position => {
+                this.position = position;
+                this.changeDetectorRef.markForCheck();
+            },
+            error => {
+                this.error = error;
+                this.changeDetectorRef.markForCheck();
+            },
+        );
     }
 
     private stopWatchGeoposition() {

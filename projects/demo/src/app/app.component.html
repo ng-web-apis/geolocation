@@ -1,15 +1,17 @@
-<header>
-    <h1>@ng-web-apis/geolocation demo</h1>
-</header>
-
-<main>
+<div class="wrapper">
     <section>
         <p>
-            This is a demo for <code>@ng-web-apis/geolocation</code> - a simple library
-            that allows you to retrieve geolocation just by using a similar-observable
-            service
+            Angular does not have any abstractions over Geolocation API. This library
+            provides you similar-observable service to use this API with Angular of 6+
+            version.
         </p>
     </section>
+
+    <pre><code [highlight]="sample">
+        {{samples}}
+    </code></pre>
+
+    <div *ngIf="!!error">Sorry, position is not avalibale: {{ error.message }}</div>
 
     <section class="current-position">
         <button class="primary-button" (click)="getCurrentPosition()">
@@ -37,6 +39,7 @@
             </label>
         </div>
 
+        <app-map *ngIf="!!position" [coordinatesChange]="position"></app-map>
         <ul *ngIf="!!position" class="coordinates">
             coordinates:
 
@@ -44,10 +47,5 @@
             <li>longitude: {{ position.coords.longitude }}</li>
             <li>timestamp: {{ position.timestamp }}</li>
         </ul>
-        <app-map *ngIf="!!position" [coordinatesChange]="position"></app-map>
     </section>
-</main>
-
-<footer>
-    Get it here: <a href="https://github.com/ng-web-apis/geolocation">GitHub</a>
-</footer>
+</div>
