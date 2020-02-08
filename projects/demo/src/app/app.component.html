@@ -37,13 +37,6 @@
             </div>
 
             <app-map *ngIf="!!toggle" [coordinatesChange]="position$ | async"></app-map>
-            <ul *ngIf="!!position$" class="coordinates">
-                coordinates:
-
-                <li>latitude: {{ position$.coords.latitude }}</li>
-                <li>longitude: {{ position$.coords.longitude }}</li>
-                <li>timestamp: {{ position$.timestamp }}</li>
-            </ul>
         </div>
 
         <h4>Single position</h4>
