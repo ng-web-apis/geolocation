@@ -56,6 +56,7 @@
         "@angular/compiler": "^7.2.15",
         "@angular/core": "^7.2.15",
         "@angular/forms": "^7.2.15",
+        "@angular/google-maps": "^9.0.0",
         "@angular/http": "^7.2.15",
         "@angular/platform-browser": "^7.2.15",
         "@angular/platform-browser-dynamic": "^7.2.15",
@@ -65,11 +66,11 @@
         "@nguniversal/express-engine": "^7.1.1",
         "@nguniversal/module-map-ngfactory-loader": "^7.1.1",
         "core-js": "^2.5.4",
+        "highlight.js": "^9.15.5",
+        "ngx-highlightjs": "3.0.3",
         "rxjs": "^6.5.2",
         "tslib": "^1.10.0",
-        "zone.js": "~0.8.29",
-        "highlight.js": "^9.15.5",
-        "ngx-highlightjs": "3.0.3"
+        "zone.js": "~0.8.29"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.13.9",

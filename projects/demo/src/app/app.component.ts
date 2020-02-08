@@ -21,13 +21,13 @@ export class AppComponent {
     sample = SAMPLE;
 
     constructor(
-        private readonly geolocationService: GeolocationService,
+        private readonly geolocation$: GeolocationService,
         private readonly domSanitizer: DomSanitizer,
         private readonly changeDetectorRef: ChangeDetectorRef,
     ) {}
 
     getCurrentPosition() {
-        this.geolocationService.pipe(take(1)).subscribe(
+        this.geolocation$.pipe(take(1)).subscribe(
             position => {
                 this.currentPositionUrl = this.getUrl(position);
                 this.changeDetectorRef.markForCheck();
@@ -50,7 +50,7 @@ export class AppComponent {
     }
 
     private startWatchGeoposition() {
-        this.watchSubscription = this.geolocationService.subscribe(
+        this.watchSubscription = this.geolocation$.subscribe(
             position => {
                 this.position = position;
                 this.changeDetectorRef.markForCheck();

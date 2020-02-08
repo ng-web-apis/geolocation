@@ -8,9 +8,7 @@
 [![Coveralls github](https://img.shields.io/coveralls/github/ng-web-apis/geolocation)](https://coveralls.io/github/ng-web-apis/geolocation?branch=master)
 [![angular-open-source-starter](https://img.shields.io/badge/made%20with-angular--open--source--starter-d81676?logo=angular)](https://github.com/TinkoffCreditSystems/angular-open-source-starter)
 
-This is a library for declarative use of [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) with Angular 6+.
-
-Angular does not have any abstractions over [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API). This library provides you simple observable-service to use this API with Angular of 6+ version.
+This is an Observer based abstraction over [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) to use with Angular
 
 ## Install
 
@@ -30,7 +28,7 @@ npm i @ng-web-apis/geolocation
 
 ### GeolocationService
 
-GeolocationService is an observable, that emits [Position](https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition) object
+GeolocationService is an Observable, that emits [Position](https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition) object
 
 Import service in your component:
 
@@ -38,30 +36,30 @@ Import service in your component:
 import {GeolocationService} from '@ng-web-apis/geolocation';
 
 ...
-constructor(private readonly geolocationService: GeolocationService) {}
+constructor(private readonly geolocation$: GeolocationService) {}
 ```
 
-Now, to observe user position, you can subscribe to geolocationService:
+Now, to observe user position, you can subscribe to geolocation\$:
 
 ```js
-geolocationService.subscribe(position => doSomethingWithPosition(position));
+geolocation$.subscribe(position => doSomethingWithPosition(position));
 ```
 
-If you need to get position just once and stop observing user location, you can subscribe to geolocationService and use take(1) rxJs operator:
+If you need to get position just once and stop observing user location, you can subscribe to geolocation\$ and use take(1) RxJs operator:
 
 ```js
-geolocationService.pipe(take(1)).subscribe(position => doSomethingWithPosition(position));
+geolocation$.pipe(take(1)).subscribe(position => doSomethingWithPosition(position));
 ```
 
 Or you can use async pipe to get position directly in template:
 
 ```html
-<div *ngIf="geolocationService | async as position">
+<div *ngIf="geolocation$ | async as position">
     <span>{{position.coords.latitude}}</span>
 </div>
 ```
 
-When the last subscriber unsubscribes, the service will automatically execute the clearWatch function with the current watchId
+Service is cold, meaning if there are no Subscribers, it doesn't track position
 
 ## Tokens
 
@@ -80,22 +78,16 @@ export class YourComponent {
 -   You can provide `GEOLOCATION_OPTIONS` as an object with optional properties named enableHighAccuracy, timeout and maximumAge. It uses `{}` by default. [More about options](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions)
 
 ```js
-@Component({
+@NgModule({
     ...
-    providers: [
+  providers: [
         {
-            provide: [POSITION_OPTIONS],
-            useValue: {
-                enableHighAccuracy: true,
-                timeout: 3000,
-                maximumAge: 1000,
-            }
-        }
-    ]
+            provide: POSITION_OPTIONS,
+            useValue: {enableHighAccuracy: true, timeout: 3000, maximumAge: 1000},
+        },
+    ],
 })
-export class YourComponentThatUsesGeolocation {
-    ...
-}
+export class AppModule {}
 ```
 
 ## See also

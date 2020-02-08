@@ -1,6 +1,7 @@
 import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {GoogleMapsModule} from '@angular/google-maps';
 import {BrowserModule} from '@angular/platform-browser';
 import {HighlightLanguage, HighlightModule} from 'ngx-highlightjs';
 import {POSITION_OPTIONS} from 'projects/geolocation/src/tokens/geolocation-options';
@@ -26,6 +27,7 @@ export function hljsLanguages(): ReadonlyArray<HighlightLanguage> {
         FormsModule,
         BrowserModule.withServerTransition({appId: 'demo'}),
         AppRoutingModule,
+        GoogleMapsModule,
         HighlightModule.forRoot({
             languages: hljsLanguages,
         }),
