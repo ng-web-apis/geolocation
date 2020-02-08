@@ -23,7 +23,7 @@ export class AppComponent {
     sample_async = SAMPLE_ASYNC;
 
     constructor(
-        private readonly geolocation$: GeolocationService,
+        readonly geolocation$: GeolocationService,
         private readonly domSanitizer: DomSanitizer,
         private readonly changeDetectorRef: ChangeDetectorRef,
     ) {}
