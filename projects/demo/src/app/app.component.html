@@ -35,8 +35,12 @@
                     <span class="slider round"></span>
                 </label>
             </div>
-
-            <app-map *ngIf="!!toggle" [coordinatesChange]="position$ | async"></app-map>
+            <div *ngIf="!!toggle && geolocation$ | async as geolocation">
+                <app-map
+                    *ngIf="geolocation.coords"
+                    [coordinatesChange]="geolocation.coords"
+                ></app-map>
+            </div>
         </div>
 
         <h4>Single position</h4>
