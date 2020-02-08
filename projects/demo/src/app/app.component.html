@@ -15,15 +15,46 @@
             it. Observable will emit the Position object.
         </p>
 
+        <pre><code [highlight]="sample">
+            {{sample}}
+        </code></pre>
+
+        <p>You also can use async pipe</p>
+
+        <pre><code [highlight]="sample_async">
+            {{sample_async}}
+        </code></pre>
+
+        <div class="watch-position">
+            <div class="switch-container">
+                <label for="switcher" class="switch-container__text">
+                    Track my position
+                </label>
+                <label class="switch">
+                    <input id="switcher" type="checkbox" (click)="toggleWatch()" />
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <app-map *ngIf="!!toggle" [coordinatesChange]="position$ | async"></app-map>
+            <ul *ngIf="!!position$" class="coordinates">
+                coordinates:
+
+                <li>latitude: {{ position$.coords.latitude }}</li>
+                <li>longitude: {{ position$.coords.longitude }}</li>
+                <li>timestamp: {{ position$.timestamp }}</li>
+            </ul>
+        </div>
+
         <h4>Single position</h4>
         <div class="current-position">
-            <span>
+            <p>
                 If you need to get position just once and stop observing user location,
-                you can subscribe to geolocation$ and use take(1) RxJs operator:
-            </span>
-            <pre><code [highlight]="sample">
-            {{samples}}
-        </code></pre>
+                you can subscribe to geolocation$ and use <code>take(1)</code> RxJs
+                operator. Service is cold, meaning if there are no Subscribers, it doesn't
+                track position
+            </p>
+
             <button class="primary-button" (click)="getCurrentPosition()">
                 Get my position!
             </button>
@@ -38,26 +69,6 @@
                 marginwidth="0"
                 [src]="currentPositionUrl"
             ></iframe>
-        </div>
-
-        <h4>Observing position</h4>
-        <div class="watch-position">
-            <div class="switch-container">
-                <label for="switcher" class="switch-container__text">watch me</label>
-                <label class="switch">
-                    <input id="switcher" type="checkbox" (click)="toggleWatch()" />
-                    <span class="slider round"></span>
-                </label>
-            </div>
-
-            <app-map *ngIf="!!position" [coordinatesChange]="position"></app-map>
-            <ul *ngIf="!!position" class="coordinates">
-                coordinates:
-
-                <li>latitude: {{ position.coords.latitude }}</li>
-                <li>longitude: {{ position.coords.longitude }}</li>
-                <li>timestamp: {{ position.timestamp }}</li>
-            </ul>
         </div>
     </section>
 </div>

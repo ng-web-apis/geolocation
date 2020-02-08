@@ -5,6 +5,6 @@ export const SAMPLE = `import {GeolocationService} from '@ng-web-apis/geolocatio
 constructor(private readonly geolocation$: GeolocationService) {}
 
 getPosition() {
-       geolocation$.pipe(take(1)).subscribe(position => 
+       geolocation$.subscribe(position => 
         doSomethingWithPosition(position));
    }`;
