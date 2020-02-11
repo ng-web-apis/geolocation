@@ -1,53 +1,71 @@
-<header>
-    <h1>@ng-web-apis/geolocation demo</h1>
-</header>
-
-<main>
+<div class="wrapper">
     <section>
         <p>
-            This is a demo for <code>@ng-web-apis/geolocation</code> - a simple library
-            that allows you to retrieve geolocation just by using a similar-observable
-            service
+            Angular does not have any abstractions over Geolocation API. This is an
+            Observer based abstraction over Geolocation API to use with Angular
         </p>
     </section>
 
-    <section class="current-position">
-        <button class="primary-button" (click)="getCurrentPosition()">
-            Get my position!
-        </button>
+    <div *ngIf="!!error">Sorry, position is not avalibale: {{ error.message }}</div>
 
-        <iframe
-            *ngIf="!!currentPositionUrl"
-            width="425"
-            height="350"
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"
-            [src]="currentPositionUrl"
-        ></iframe>
-    </section>
+    <section>
+        <h3>How to use</h3>
+        <p>
+            Usage is pretty simple: just import service in your component and subscribe
+            it. Observable will emit the Position object.
+        </p>
 
-    <section class="watch-position">
-        <div class="switch-container">
-            <label for="switcher" class="switch-container__text">watch me</label>
-            <label class="switch">
-                <input id="switcher" type="checkbox" (click)="toggleWatch()" />
-                <span class="slider round"></span>
-            </label>
+        <pre><code [highlight]="sample">
+            {{sample}}
+        </code></pre>
+
+        <p>You also can use async pipe</p>
+
+        <pre><code [highlight]="sample_async">
+            {{sample_async}}
+        </code></pre>
+
+        <div class="watch-position">
+            <div class="switch-container">
+                <label for="switcher" class="switch-container__text">
+                    Track my position
+                </label>
+                <label class="switch">
+                    <input id="switcher" type="checkbox" (click)="toggleWatch()" />
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div *ngIf="!!toggle && geolocation$ | async as geolocation">
+                <app-map
+                    *ngIf="geolocation.coords"
+                    [coordinatesChange]="geolocation.coords"
+                ></app-map>
+            </div>
         </div>
 
-        <ul *ngIf="!!position" class="coordinates">
-            coordinates:
+        <h4>Single position</h4>
+        <div class="current-position">
+            <p>
+                If you need to get position just once and stop observing user location,
+                you can subscribe to geolocation$ and use <code>take(1)</code> RxJs
+                operator. Service is cold, meaning if there are no Subscribers, it doesn't
+                track position
+            </p>
 
-            <li>latitude: {{ position.coords.latitude }}</li>
-            <li>longitude: {{ position.coords.longitude }}</li>
-            <li>timestamp: {{ position.timestamp }}</li>
-        </ul>
-        <app-map *ngIf="!!position" [coordinatesChange]="position"></app-map>
+            <button class="primary-button" (click)="getCurrentPosition()">
+                Get my position!
+            </button>
+
+            <iframe
+                *ngIf="!!currentPositionUrl"
+                width="425"
+                height="350"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+                [src]="currentPositionUrl"
+            ></iframe>
+        </div>
     </section>
-</main>
-
-<footer>
-    Get it here: <a href="https://github.com/ng-web-apis/geolocation">GitHub</a>
-</footer>
+</div>

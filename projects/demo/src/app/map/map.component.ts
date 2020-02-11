@@ -26,8 +26,8 @@ export class MapComponent {
             return;
         }
 
-        const deltaX = (this.initialCoords.longitude + coordinates.longitude) * 10000;
-        const deltaY = (this.initialCoords.latitude + coordinates.latitude)! * 10000;
+        const deltaX = (this.initialCoords.longitude - coordinates.longitude) * 10000;
+        const deltaY = (this.initialCoords.latitude - coordinates.latitude) * 10000;
         const style = `translate(${deltaX}px,${deltaY}px)`;
 
         const safestyle = this.domSanitizer.bypassSecurityTrustStyle(style);

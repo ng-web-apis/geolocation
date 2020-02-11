@@ -3,54 +3,46 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {GeolocationService} from '@ng-web-apis/geolocation';
 import {Subscription} from 'rxjs';
 import {take} from 'rxjs/operators';
+import {SAMPLE} from './samples/sample';
+import {SAMPLE_ASYNC} from './samples/sample-async';
 
 @Component({
-    selector: 'my-app',
+    selector: 'main',
     templateUrl: './app.component.html',
     styleUrls: ['./app.style.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
     position: Position | null = null;
-    currentPositionUrl: SafeResourceUrl | null = null;
     toggle = false;
+    currentPositionUrl: SafeResourceUrl | null = null;
     watchSubscription: Subscription | null = null;
+    error: PositionError | null = null;
+
+    sample = SAMPLE;
+    sample_async = SAMPLE_ASYNC;
 
     constructor(
-        private readonly geolocationService: GeolocationService,
+        readonly geolocation$: GeolocationService,
         private readonly domSanitizer: DomSanitizer,
         private readonly changeDetectorRef: ChangeDetectorRef,
     ) {}
 
     getCurrentPosition() {
-        this.geolocationService.pipe(take(1)).subscribe(position => {
-            this.currentPositionUrl = this.getUrl(position);
-            this.changeDetectorRef.markForCheck();
-        });
+        this.geolocation$.pipe(take(1)).subscribe(
+            position => {
+                this.currentPositionUrl = this.getUrl(position);
+                this.changeDetectorRef.markForCheck();
+            },
+            error => {
+                this.error = error;
+                this.changeDetectorRef.markForCheck();
+            },
+        );
     }
 
     toggleWatch() {
-        if (!this.watchSubscription) {
-            this.startWatchGeoposition();
-
-            return;
-        }
-
-        this.stopWatchGeoposition();
-    }
-
-    private startWatchGeoposition() {
-        this.watchSubscription = this.geolocationService.subscribe(position => {
-            this.position = position;
-            this.changeDetectorRef.markForCheck();
-        });
-    }
-
-    private stopWatchGeoposition() {
-        if (this.watchSubscription) {
-            this.watchSubscription.unsubscribe();
-            this.watchSubscription = null;
-        }
+        this.toggle = !this.toggle;
     }
 
     private getUrl(position: Position): SafeResourceUrl {

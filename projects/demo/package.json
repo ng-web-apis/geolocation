@@ -19,13 +19,16 @@
         "rxjs": "6.5.2",
         "zone.js": "0.9.1",
         "@ng-web-apis/geolocation": "latest",
-        "@ng-web-apis/common": "1.0.1"
+        "@ng-web-apis/common": "1.0.1",
+        "highlight.js": "^9.15.5",
+        "ngx-highlightjs": "3.0.3"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^0.803.2",
         "@angular/cli": "^8.3.2",
         "@angular/compiler-cli": "^8.2.4",
         "@angular/language-service": "^8.2.4",
+        "@types/highlight.js": "^9.12.3",
         "@types/node": "~8.9.4",
         "ts-node": "~7.0.0",
         "tslint": "~5.11.0",
