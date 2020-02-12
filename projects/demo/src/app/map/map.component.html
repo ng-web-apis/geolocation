@@ -21,4 +21,8 @@
             </g>
         </svg>
     </div>
+    <div *ngIf="currentCoords" class="coords">
+        <div>long: {{ currentCoords.longitude }}</div>
+        <div>lat: {{ currentCoords.latitude }}</div>
+    </div>
 </div>

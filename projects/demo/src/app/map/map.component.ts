@@ -11,7 +11,10 @@ export class MapComponent {
     @Input()
     set coordinatesChange(coords: Coordinates) {
         this.coordsToStyle(coords);
+        this.currentCoords = coords;
     }
+
+    currentCoords: Coordinates | null = null;
 
     initialCoords: Coordinates | null = null;
 
