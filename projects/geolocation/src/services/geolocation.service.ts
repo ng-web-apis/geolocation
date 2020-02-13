@@ -5,6 +5,7 @@ import {GEOLOCATION} from '../tokens/geolocation';
 import {POSITION_OPTIONS} from '../tokens/geolocation-options';
 import {GEOLOCATION_SUPPORT} from '../tokens/geolocation-support';
 
+// @dynamic
 @Injectable({
     providedIn: 'root',
 })
