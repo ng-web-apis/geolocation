@@ -32,7 +32,8 @@
         "build:geolocation": "ng run geolocation:build",
         "test:geolocation": "ng run geolocation:test",
         "test:geolocation:watch": "ng run geolocation:test --watch=true",
-        "publish:geolocation": "npm publish ./dist/geolocation"
+        "publish:geolocation": "npm publish ./dist/geolocation",
+        "postbuild": "node scripts/postbuild.js"
     },
     "license": "MIT",
     "author": {
