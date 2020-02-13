@@ -8,7 +8,7 @@
 [![Coveralls github](https://img.shields.io/coveralls/github/ng-web-apis/geolocation)](https://coveralls.io/github/ng-web-apis/geolocation?branch=master)
 [![angular-open-source-starter](https://img.shields.io/badge/made%20with-angular--open--source--starter-d81676?logo=angular)](https://github.com/TinkoffCreditSystems/angular-open-source-starter)
 
-This is an Observer based abstraction over [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) to use with Angular
+This is an `Observable` based abstraction over [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API) to use with Angular
 
 ## Install
 
@@ -28,7 +28,7 @@ npm i @ng-web-apis/geolocation
 
 ### GeolocationService
 
-GeolocationService is an Observable, that emits [Position](https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition) object
+`GeolocationService` is an `Observable`, that emits [Position](https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition) object
 
 Import service in your component:
 
@@ -39,13 +39,13 @@ import {GeolocationService} from '@ng-web-apis/geolocation';
 constructor(private readonly geolocation$: GeolocationService) {}
 ```
 
-Now, to observe user position, you can subscribe to geolocation\$:
+Now, to observe user position, you can subscribe to `geolocation$`:
 
 ```js
 geolocation$.subscribe(position => doSomethingWithPosition(position));
 ```
 
-If you need to get position just once and stop observing user location, you can subscribe to geolocation\$ and use take(1) RxJs operator:
+If you need to get position just once and stop observing user location, you can subscribe to `geolocation$` and use `take(1)` RxJs operator:
 
 ```js
 geolocation$.pipe(take(1)).subscribe(position => doSomethingWithPosition(position));
@@ -59,13 +59,14 @@ Or you can use async pipe to get position directly in template:
 </div>
 ```
 
-Service is cold, meaning if there are no Subscribers, it doesn't track position
+Service is cold, meaning if there are no active subscriptions, it doesn't track position.
 
 ## Tokens
 
-The library also provides some tokens to simplify working with Geolocation API:
+The library also provides some tokens to simplify working with [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API):
 
--   `GEOLOCATION_SUPPORT` returns `true` if user's browser supports Geolocation API
+-   `GEOLOCATION_SUPPORT` returns `true` if user's browser supports 
+    [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API)
 
 ```js
 export class YourComponent {
@@ -75,7 +76,9 @@ export class YourComponent {
     ...
 ```
 
--   You can provide `GEOLOCATION_OPTIONS` as an object with optional properties named enableHighAccuracy, timeout and maximumAge. It uses `{}` by default. [More about options](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions)
+-   You can provide [PositionOptions](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions) 
+    through `GEOLOCATION_OPTIONS` token with optional properties named `enableHighAccuracy`, `timeout` and `maximumAge`. 
+    It uses `{}` by default.
 
 ```js
 @NgModule({
@@ -90,9 +93,13 @@ export class YourComponent {
 export class AppModule {}
 ```
 
+## Demo
+
+You can [try online demo here](https://ng-web-apis.github.io/geolocation)
+
 ## See also
 
-All [@ng-web-apis](https://ng-web-apis.github.io/) for your apps
+Other [Web APIs for Angular](https://ng-web-apis.github.io/) by [@ng-web-apis](https://github.com/ng-web-apis)
 
 ## Open-source
 
