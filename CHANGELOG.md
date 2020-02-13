@@ -1,3 +1,18 @@
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### 1.0.1 (2020-02-13)
+
+### Features
+
+-   **geolocation:** service and directive add ([98fa113](https://github.com/ng-web-apis/geolocation/commit/98fa1134a715d68aa1589c29aa444a796d8560d3))
+
+### Bug Fixes
+
+-   **GeolocationService:** add [@dynamic](https://github.com/dynamic) ([6b39b3c](https://github.com/ng-web-apis/geolocation/commit/6b39b3c3ec4757fd2fc6f06c94e5f42d9a022e30))
+-   **script:** fix postbuild script ([65bbb2e](https://github.com/ng-web-apis/geolocation/commit/65bbb2e0007393a71994640a7ebc01b92a60404a))
+
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
