@@ -1,18 +1,21 @@
 <div class="wrapper">
     <section>
         <p>
-            Angular does not have any abstractions over Geolocation API. This is an
-            Observer based abstraction over Geolocation API to use with Angular
+            <strong>Angular</strong> does not have any built-in instruments to use
+            <strong>Geolocation API</strong>. This is an <code>Observable</code> based
+            abstraction over <strong>Geolocation API</strong> to use with
+            <strong>Angular</strong>
         </p>
     </section>
 
     <div *ngIf="!!error">Sorry, position is not avalibale: {{ error.message }}</div>
 
     <section>
-        <h3>How to use</h3>
+        <h2>How to use</h2>
         <p>
-            Usage is pretty simple: just import service in your component and subscribe
-            it. Observable will emit the Position object.
+            Usage is pretty simple: just import service in your component and subscribe to
+            it. Service extends <code>Observable</code> and will emit the
+            <code>Position</code> object.
         </p>
 
         <pre><code [highlight]="sample">
@@ -43,7 +46,7 @@
             </div>
         </div>
 
-        <h4>Single position</h4>
+        <h2>Single position</h2>
         <div class="current-position">
             <p>
                 If you need to get position just once and stop observing user location,
