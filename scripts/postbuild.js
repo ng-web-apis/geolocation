@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const DIST_LIB_PATH = 'dist/payment-request/';
+const DIST_LIB_PATH = 'dist/geolocation/';
 const README_PATH = 'README.md';
 const ASSETS_PATH = 'projects/demo/src/assets';
 const PATH_TO_README = DIST_LIB_PATH + README_PATH;
