@@ -77,7 +77,7 @@ export class YourComponent {
 ```
 
 -   You can provide [PositionOptions](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions) 
-    through `GEOLOCATION_OPTIONS` token with optional properties named `enableHighAccuracy`, `timeout` and `maximumAge`. 
+    through `POSITION_OPTIONS` token with optional properties named `enableHighAccuracy`, `timeout` and `maximumAge`. 
     It uses `{}` by default.
 
 ```js
