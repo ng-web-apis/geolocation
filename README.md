@@ -93,7 +93,7 @@ export class YourComponent {
 export class AppModule {}
 ```
 
--   [Navigator Geolocation](https://developer.mozilla.org/ru/docs/Web/API/Navigator/geolocation)
+-   [navigator.geolocation](https://developer.mozilla.org/ru/docs/Web/API/Navigator/geolocation)
     can be injected through `GEOLOCATION` token.
 
 ## Demo
