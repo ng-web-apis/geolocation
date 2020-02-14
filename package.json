@@ -1,6 +1,6 @@
 {
     "name": "@ng-web-apis/geolocation",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "This is a library for declarative use of Geolocation API with Angular",
     "keywords": ["angular", "ng", "Geolocation api", "pwa", "progressive web app"],
     "scripts": {
@@ -26,13 +26,12 @@
         "release:patch": "npm run release -- --release-as patch",
         "release:minor": "npm run release -- --release-as minor",
         "release:major": "npm run release -- --release-as major",
-        "publish": "npm run build:all && npm publish:all",
         "build:all": "npm run build:geolocation",
         "publish:all": "npm run publish:geolocation",
         "build:geolocation": "ng run geolocation:build",
         "test:geolocation": "ng run geolocation:test",
         "test:geolocation:watch": "ng run geolocation:test --watch=true",
-        "publish:geolocation": "npm run build && npm publish ./dist/geolocation",
+        "publish": "npm run build && npm publish ./dist/geolocation",
         "postbuild": "node scripts/postbuild.js"
     },
     "license": "MIT",
