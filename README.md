@@ -65,7 +65,7 @@ Service is cold, meaning if there are no active subscriptions, it doesn't track 
 
 The library also provides some tokens to simplify working with [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API):
 
--   `GEOLOCATION_SUPPORT` returns `true` if user's browser supports 
+-   `GEOLOCATION_SUPPORT` returns `true` if user's browser supports
     [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API)
 
 ```js
@@ -76,8 +76,8 @@ export class YourComponent {
     ...
 ```
 
--   You can provide [PositionOptions](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions) 
-    through `POSITION_OPTIONS` token with optional properties named `enableHighAccuracy`, `timeout` and `maximumAge`. 
+-   You can provide [PositionOptions](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions)
+    through `POSITION_OPTIONS` token with optional properties named `enableHighAccuracy`, `timeout` and `maximumAge`.
     It uses `{}` by default.
 
 ```js
@@ -92,6 +92,9 @@ export class YourComponent {
 })
 export class AppModule {}
 ```
+
+-   [Navigator Geolocation](https://developer.mozilla.org/ru/docs/Web/API/Navigator/geolocation)
+    can be injected through `GEOLOCATION` token.
 
 ## Demo
 
