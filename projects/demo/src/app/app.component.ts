@@ -19,8 +19,8 @@ export class AppComponent {
     watchSubscription: Subscription | null = null;
     error: PositionError | null = null;
 
-    sample = SAMPLE;
-    sample_async = SAMPLE_ASYNC;
+    readonly sample = SAMPLE;
+    readonly sampleAsync = SAMPLE_ASYNC;
 
     constructor(
         readonly geolocation$: GeolocationService,
