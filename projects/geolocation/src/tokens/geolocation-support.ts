@@ -1,13 +1,13 @@
 import {inject, InjectionToken} from '@angular/core';
-import {WINDOW} from '@ng-web-apis/common';
+import {GEOLOCATION} from './geolocation';
 
 export const GEOLOCATION_SUPPORT = new InjectionToken<boolean>(
-    'Is Geolocation Api supported?',
+    'Is Geolocation API supported?',
     {
         factory: () => {
-            const window = inject(WINDOW);
+            const geolocation = inject(GEOLOCATION);
 
-            return !!window.navigator && !!window.navigator.geolocation;
+            return !!geolocation;
         },
     },
 );
