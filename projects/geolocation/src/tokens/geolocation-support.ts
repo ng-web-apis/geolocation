@@ -5,9 +5,7 @@ export const GEOLOCATION_SUPPORT = new InjectionToken<boolean>(
     'Is Geolocation API supported?',
     {
         factory: () => {
-            const geolocation = inject(GEOLOCATION);
-
-            return !!geolocation;
+            return !!inject(GEOLOCATION);
         },
     },
 );
