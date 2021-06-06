@@ -18,7 +18,6 @@
         "compile:server": "tsc -p ./projects/demo/tsconfig.ssr.json",
         "generate:prerender": "node dist/demo/ssr/prerender",
         "test": "ng test",
-        "posttest": "node scripts/coveralls.js",
         "postadd": "git add ./projects",
         "lint": "ng lint",
         "typecheck": "tsc --noEmit --skipLibCheck",
