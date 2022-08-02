@@ -13,11 +13,11 @@ import {SAMPLE_ASYNC} from './samples/sample-async';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-    position: Position | null = null;
+    position: GeolocationPosition | null = null;
     toggle = false;
     currentPositionUrl: SafeResourceUrl | null = null;
     watchSubscription: Subscription | null = null;
-    error: PositionError | null = null;
+    error: GeolocationPositionError | null = null;
 
     readonly sample = SAMPLE;
     readonly sampleAsync = SAMPLE_ASYNC;
@@ -45,7 +45,7 @@ export class AppComponent {
         this.toggle = !this.toggle;
     }
 
-    private getUrl(position: Position): SafeResourceUrl {
+    private getUrl(position: GeolocationPosition): SafeResourceUrl {
         const longitude = position.coords.longitude;
         const latitude = position.coords.latitude;
 

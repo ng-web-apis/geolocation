@@ -2,12 +2,12 @@
     "compileOnSave": false,
     "compilerOptions": {
         "baseUrl": "./",
+        "downlevelIteration": true,
         "outDir": "./dist/out-tsc",
         "sourceMap": true,
         "declaration": false,
-        "module": "esnext",
+        "module": "es2020",
         "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "importHelpers": true,
         "strict": true,
@@ -21,5 +21,7 @@
         "paths": {
             "@ng-web-apis/geolocation": ["projects/geolocation/src/public-api"]
         }
-    }
+    },
+    "files": ["projects/demo/src/main.browser.ts", "projects/demo/src/polyfills.ts"],
+    "include": ["projects/demo/src/**/*.d.ts"]
 }

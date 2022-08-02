@@ -26,5 +26,8 @@
     ],
     "repository": "https://github.com/ng-web-apis/geolocation",
     "bugs": "https://github.com/ng-web-apis/geolocation/issues",
+    "dependencies": {
+        "tslib": "^2.0.0"
+    },
     "homepage": "https://github.com/ng-web-apis/geolocation#README"
 }
