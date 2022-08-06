@@ -7,11 +7,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 -   **core:** update to ng v12 ([5790424](https://github.com/ng-web-apis/geolocation/commit/579042424018bdab22ab555b2e868757bdd13c4f))
--   **readme:** add browser support ([c19f333](https://github.com/ng-web-apis/geolocation/commit/c19f333fbec00ffbff75e39d0d7b0dee85c5e9df))
-
-### Bug Fixes
-
--   **service:** add type workaround to support TS 4.1+ ([a1091c7](https://github.com/ng-web-apis/geolocation/commit/a1091c73708013be6805edf857aca2cf3578c437))
 
 ### [1.0.4](https://github.com/ng-web-apis/geolocation/compare/v1.0.3...v1.0.4) (2021-02-05)
 
