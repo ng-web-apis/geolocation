@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/ng-web-apis/geolocation/compare/v1.0.3...v2.0.0) (2022-08-06)
+
+### Features
+
+-   **core:** update to ng v12 ([5790424](https://github.com/ng-web-apis/geolocation/commit/579042424018bdab22ab555b2e868757bdd13c4f))
+
 ### [1.0.4](https://github.com/ng-web-apis/geolocation/compare/v1.0.3...v1.0.4) (2021-02-05)
 
 ### Bug Fixes
