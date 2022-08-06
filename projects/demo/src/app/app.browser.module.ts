@@ -2,23 +2,21 @@ import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {HighlightLanguage, HighlightModule} from 'ngx-highlightjs';
-import {POSITION_OPTIONS} from 'projects/geolocation/src/tokens/geolocation-options';
+import {POSITION_OPTIONS} from '@ng-web-apis/geolocation';
+import {HighlightModule, HighlightOptions, HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
+
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routes';
 import {MapComponent} from './map/map.component';
 
-const less = require('highlight.js/lib/languages/less');
-const typescript = require('highlight.js/lib/languages/typescript');
-const xml = require('highlight.js/lib/languages/xml');
-
-export function hljsLanguages(): ReadonlyArray<HighlightLanguage> {
-    return [
-        {name: 'typescript', func: typescript},
-        {name: 'less', func: less},
-        {name: 'xml', func: xml},
-    ];
-}
+const highlightOptions: HighlightOptions = {
+    coreLibraryLoader: () => import('highlight.js/lib/highlight'),
+    languages: {
+        less: () => import('highlight.js/lib/languages/less'),
+        typescript: () => import('highlight.js/lib/languages/typescript'),
+        xml: () => import('highlight.js/lib/languages/xml'),
+    },
+};
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -26,12 +24,14 @@ export function hljsLanguages(): ReadonlyArray<HighlightLanguage> {
         FormsModule,
         BrowserModule.withServerTransition({appId: 'demo'}),
         AppRoutingModule,
-        HighlightModule.forRoot({
-            languages: hljsLanguages,
-        }),
+        HighlightModule,
     ],
     declarations: [AppComponent, MapComponent],
     providers: [
+        {
+            provide: HIGHLIGHT_OPTIONS,
+            useValue: highlightOptions,
+        },
         {
             provide: LocationStrategy,
             useClass: PathLocationStrategy,

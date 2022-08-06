@@ -9,20 +9,20 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class MapComponent {
     @Input()
-    set coordinatesChange(coords: Coordinates) {
+    set coordinatesChange(coords: GeolocationCoordinates) {
         this.coordsToStyle(coords);
         this.currentCoords = coords;
     }
 
-    currentCoords: Coordinates | null = null;
+    currentCoords: GeolocationCoordinates | null = null;
 
-    initialCoords: Coordinates | null = null;
+    initialCoords: GeolocationCoordinates | null = null;
 
     markerTransform$ = new BehaviorSubject<SafeStyle>('translate(0px,0px)');
 
     constructor(private readonly domSanitizer: DomSanitizer) {}
 
-    private coordsToStyle(coordinates: Coordinates) {
+    private coordsToStyle(coordinates: GeolocationCoordinates) {
         if (!this.initialCoords) {
             this.initialCoords = coordinates;
 

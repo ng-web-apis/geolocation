@@ -20,7 +20,6 @@
                         "main": "projects/demo/src/main.browser.ts",
                         "polyfills": "projects/demo/src/polyfills.ts",
                         "tsConfig": "tsconfig.json",
-                        "aot": false,
                         "assets": [
                             {
                                 "glob": "**/*",
@@ -30,7 +29,13 @@
                             "projects/demo/src/favicon.ico"
                         ],
                         "styles": ["projects/demo/src/styles.css"],
-                        "scripts": []
+                        "scripts": [],
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     },
                     "configurations": {
                         "production": {
@@ -39,9 +44,7 @@
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
-                            "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
@@ -50,10 +53,15 @@
                                     "type": "initial",
                                     "maximumWarning": "2mb",
                                     "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
                                 }
                             ]
                         }
-                    }
+                    },
+                    "defaultConfiguration": ""
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -70,15 +78,42 @@
                     "builder": "@angular-devkit/build-angular:server",
                     "options": {
                         "outputPath": "dist/demo/server",
-                        "main": "projects/demo/src/main.server.ts",
-                        "tsConfig": "projects/demo/tsconfig.server.json"
-                    }
+                        "main": "projects/demo/server.ts",
+                        "tsConfig": "projects/demo/tsconfig.server.json",
+                        "sourceMap": true,
+                        "optimization": false
+                    },
+                    "defaultConfiguration": ""
                 },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": ["tsconfig.json"],
                         "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "serve-ssr": {
+                    "builder": "@nguniversal/builders:ssr-dev-server",
+                    "options": {
+                        "browserTarget": "demo:build",
+                        "serverTarget": "demo:server"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "demo:build:production",
+                            "serverTarget": "demo:server:production"
+                        }
+                    }
+                },
+                "prerender": {
+                    "builder": "@nguniversal/builders:prerender",
+                    "options": {
+                        "browserTarget": "demo:build:production",
+                        "serverTarget": "demo:server:production",
+                        "routes": ["/"]
+                    },
+                    "configurations": {
+                        "production": {}
                     }
                 }
             }
@@ -89,10 +124,15 @@
             "sourceRoot": "projects/geolocation/src",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
                     "options": {
                         "tsConfig": "projects/geolocation/tsconfig.lib.json",
                         "project": "projects/geolocation/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/geolocation/tsconfig.lib.prod.json"
+                        }
                     }
                 },
                 "test": {

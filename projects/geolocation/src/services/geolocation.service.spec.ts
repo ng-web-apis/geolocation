@@ -44,7 +44,7 @@ describe('Geolocation service', () => {
     });
 
     it('Provides position from cache if other subscriptions exist', done => {
-        let firstPosition: Position;
+        let firstPosition: GeolocationPosition;
 
         service.subscribe(position => {
             firstPosition = position;
