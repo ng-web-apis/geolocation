@@ -17,7 +17,7 @@ module.exports = function(config) {
         },
         coverageReporter: {
             dir: require('path').join(__dirname, '../../coverage/geolocation'),
-            reporters: ['html', 'lcovonly'],
+            reporters: [{type: 'lcov', subdir: 'report-lcov'}],
             fixWebpackSourcePaths: true,
         },
         reporters: ['progress', 'kjhtml', 'coverage'],
