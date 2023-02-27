@@ -87,7 +87,7 @@
         "coveralls": "^3.0.5",
         "ecstatic": "^4.1.2",
         "express": "^4.17.1",
-        "http-server": "^0.11.1",
+        "http-server": "^14.1.1",
         "husky": "^3.0.2",
         "jasmine-core": "~3.6.0",
         "jasmine-spec-reporter": "~5.0.0",
